@@ -104,7 +104,7 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
-
+	
 	<build>
 		<plugins>
 			<plugin>
@@ -115,10 +115,23 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
+		</plugins>
+		<pluginManagement>
 			<!-- SETA AS DEPENDÊNCIAS NO CLASSPATH DO JAR -->
-			<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-jar-plugin</artifactId> <configuration> <archive> <manifest> <addClasspath>true</addClasspath> 
-				<classpathPrefix></classpathPrefix> </manifest> </archive> <outputDirectory>${project.build.directory}/../../../lib</outputDirectory> </configuration> 
-				</plugin> -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib</classpathPrefix>
+							<mainClass>sk.bootstrap.Application</mainClass>
+						</manifest>
+					</archive>
+					<outputDirectory>${project.build.directory}</outputDirectory>
+				</configuration>
+			</plugin>
 			<!-- COPIA AS DEPENDÊNCIAS PARA A PASTA LIB -->
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -140,6 +153,6 @@
 					</execution>
 				</executions>
 			</plugin>
-		</plugins>
+		</pluginManagement>
 	</build>
 </project>
