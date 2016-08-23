@@ -23,5 +23,9 @@
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>com.thoughtworks.qdox</groupId>
+			<artifactId>qdox</artifactId>
+		</dependency>
 	</dependencies>
 </project>
