@@ -26,6 +26,7 @@
 		<dependency>
 			<groupId>com.thoughtworks.qdox</groupId>
 			<artifactId>qdox</artifactId>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 </project>
