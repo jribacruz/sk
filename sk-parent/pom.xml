@@ -50,9 +50,9 @@
 			</dependency>
 			<!-- https://mvnrepository.com/artifact/com.lyncode/jtwig-core -->
 			<dependency>
-				<groupId>com.lyncode</groupId>
+				<groupId>org.jtwig</groupId>
 				<artifactId>jtwig-core</artifactId>
-				<version>3.1.1</version>
+				<version>5.57</version>
 			</dependency>
 			<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
 			<dependency>
@@ -104,6 +104,13 @@
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
+	
+	<repositories>
+		<repository>
+			<id>jcenter-repo</id>
+			<url>https://dl.bintray.com/jaycroaker/maven</url>
+		</repository>
+	</repositories>
 	
 	<build>
 		<plugins>
