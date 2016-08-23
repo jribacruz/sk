@@ -134,7 +134,7 @@
 							<manifest>
 								<addClasspath>true</addClasspath>
 								<classpathPrefix>lib</classpathPrefix>
-								<mainClass>sk.app.bootstrap.Application</mainClass>
+								<mainClass>sk.app.Bootstrap</mainClass>
 							</manifest>
 						</archive>
 						<outputDirectory>${project.build.directory}</outputDirectory>
@@ -165,8 +165,8 @@
 		</pluginManagement>
 	</build>
 	<modules>
-		<module>sk-api</module>
-		<module>sk-app</module>
-		<module>sk-impl</module>
+		<module>./../sk-api</module>
+		<module>./../sk-app</module>
+		<module>./../sk-impl</module>
 	</modules>
 </project>
