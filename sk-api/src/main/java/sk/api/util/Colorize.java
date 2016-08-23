@@ -1,4 +1,4 @@
-package sk.api;
+package sk.api.util;
 
 public class Colorize {
 	/**

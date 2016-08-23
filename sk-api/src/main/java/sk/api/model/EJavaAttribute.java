@@ -4,8 +4,8 @@ import java.io.Serializable;
 
 import com.thoughtworks.qdox.model.JavaField;
 
-import sk.api.Colorize;
 import sk.api.reader.Selectable;
+import sk.api.util.Colorize;
 
 /**
  * Modelo de atributo java.

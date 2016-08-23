@@ -2,8 +2,8 @@ package sk.api.model;
 
 import java.io.File;
 
-import sk.api.Colorize;
 import sk.api.reader.Selectable;
+import sk.api.util.Colorize;
 
 public interface EFile extends Selectable<EFile> {
 

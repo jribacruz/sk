@@ -5,8 +5,8 @@ import java.util.SortedSet;
 
 import com.thoughtworks.qdox.model.JavaClass;
 
-import sk.api.Colorize;
 import sk.api.reader.Selectable;
+import sk.api.util.Colorize;
 
 public interface EJavaClass extends Selectable<EJavaClass>, Serializable {
 
