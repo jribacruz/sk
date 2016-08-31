@@ -6,6 +6,7 @@ import java.io.IOException;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 
+import org.apache.commons.io.FilenameUtils;
 import org.jboss.weld.environment.se.Weld;
 import org.jboss.weld.environment.se.WeldContainer;
 
@@ -51,6 +52,8 @@ public class Bootstrap {
 	}
 
 	private void init(String args[]) throws IOException {
+
+		context.put("PROJECT_HOME", FilenameUtils.normalize(args[0]));
 
 		afterInitEvent.fire(new AfterInit() {
 			private static final long serialVersionUID = 1L;
