@@ -100,4 +100,5 @@ public class Colorize {
 	public static String bgGreen(String value) {
 		return String.format("\033[42m%s\033[0m", value);
 	}
+
 }
