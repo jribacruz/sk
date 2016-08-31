@@ -145,11 +145,13 @@
 						<archive>
 							<manifest>
 								<addClasspath>true</addClasspath>
-								<classpathPrefix>lib</classpathPrefix>
+								<classpathPrefix>dependencies</classpathPrefix>
 								<mainClass>sk.app.Bootstrap</mainClass>
+								<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+								<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
 							</manifest>
 						</archive>
-						<outputDirectory>${project.build.directory}</outputDirectory>
+						<outputDirectory>${user.home}/git/sk/bin/</outputDirectory>
 					</configuration>
 				</plugin>
 				<!-- COPIA AS DEPENDÊNCIAS PARA A PASTA LIB -->
@@ -165,7 +167,7 @@
 								<goal>copy-dependencies</goal>
 							</goals>
 							<configuration>
-								<outputDirectory>${project.build.directory}/lib</outputDirectory>
+								<outputDirectory>${user.home}/git/sk/bin/dependencies/</outputDirectory>
 								<overWriteReleases>false</overWriteReleases>
 								<overWriteSnapshots>false</overWriteSnapshots>
 								<overWriteIfNewer>true</overWriteIfNewer>
