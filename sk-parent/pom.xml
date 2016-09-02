@@ -179,8 +179,8 @@
 		</pluginManagement>
 	</build>
 	<modules>
-		<module>./../sk-api</module>
-		<module>./../sk-app</module>
-		<module>./../sk-impl</module>
+		<module>sk-api</module>
+		<module>sk-app</module>
+		<module>sk-impl</module>
 	</modules>
 </project>
