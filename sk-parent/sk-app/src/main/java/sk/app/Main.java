@@ -10,7 +10,7 @@ import sk.api.SkApplication;
 import sk.api.event.AfterInit;
 import sk.api.model.EJavaProject;
 
-public class SkMain implements Serializable {
+public class Main implements Serializable {
 
 	@Inject
 	private Instance<SkApplication> applications;
