@@ -90,7 +90,7 @@ public class ReaderImpl implements Reader {
 
 	private <T extends Name> String getFormattedMessage() {
 		StringBuffer sb = new StringBuffer();
-		sb.append(context.get(("PROMPT_KEY")));
+		sb.append(context.get(("PROMPT_ID")));
 		sb.append(">");
 		sb.append(message);
 		if (StringUtils.isNotBlank(defaultValue)) {

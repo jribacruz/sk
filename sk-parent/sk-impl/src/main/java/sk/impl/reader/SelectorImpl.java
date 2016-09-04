@@ -286,7 +286,7 @@ public class SelectorImpl implements Selector {
 	private String readConsole(String prompt) throws IOException {
 		ConsoleReader consoleReader = new ConsoleReader();
 		consoleReader.setHandleUserInterrupt(true);
-		String value = consoleReader.readLine(String.format("%s> %s: ", prompt));
+		String value = consoleReader.readLine(String.format("%s> %s: ", context.get("PROMPT_ID"), prompt));
 		consoleReader.close();
 		return StringUtils.trim(value);
 	}
