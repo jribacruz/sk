@@ -11,7 +11,7 @@ import sk.api.event.AfterInit;
 import sk.api.model.EJavaProject;
 
 /**
- * Classe que chama as aplicativos SK.
+ * Classe que chama os aplicativos SK.
  * 
  * @author jcruz
  *
