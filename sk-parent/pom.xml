@@ -149,7 +149,7 @@
 								<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
 							</manifest>
 						</archive>
-						<outputDirectory>${user.home}/git/sk/bin/</outputDirectory>
+						<outputDirectory>${user.home}/sk/bin/</outputDirectory>
 					</configuration>
 				</plugin>
 				<!-- COPIA AS DEPENDÊNCIAS PARA A PASTA LIB -->
@@ -165,7 +165,7 @@
 								<goal>copy-dependencies</goal>
 							</goals>
 							<configuration>
-								<outputDirectory>${user.home}/git/sk/bin/dependencies/</outputDirectory>
+								<outputDirectory>${user.home}/sk/bin/dependencies/</outputDirectory>
 								<overWriteReleases>false</overWriteReleases>
 								<overWriteSnapshots>false</overWriteSnapshots>
 								<overWriteIfNewer>true</overWriteIfNewer>
