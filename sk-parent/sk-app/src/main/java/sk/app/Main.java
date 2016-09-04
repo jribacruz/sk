@@ -10,6 +10,12 @@ import sk.api.SkApplication;
 import sk.api.event.AfterInit;
 import sk.api.model.EJavaProject;
 
+/**
+ * Classe que chama as aplicativos SK.
+ * 
+ * @author jcruz
+ *
+ */
 public class Main implements Serializable {
 
 	@Inject
