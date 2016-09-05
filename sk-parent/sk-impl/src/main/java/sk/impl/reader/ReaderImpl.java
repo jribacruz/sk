@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Set;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
@@ -27,6 +28,10 @@ public class ReaderImpl implements Reader {
 
 	@Inject
 	private Context context;
+
+	@Inject
+	@Named("PROMP_ID")
+	private String PROMPT_ID;
 
 	private String message;
 
@@ -90,7 +95,7 @@ public class ReaderImpl implements Reader {
 
 	private <T extends Name> String getFormattedMessage() {
 		StringBuffer sb = new StringBuffer();
-		sb.append(context.get(("PROMPT_ID")));
+		sb.append(PROMPT_ID);
 		sb.append(">");
 		sb.append(message);
 		if (StringUtils.isNotBlank(defaultValue)) {

@@ -4,11 +4,11 @@ import java.io.IOException;
 import java.io.Serializable;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.apache.commons.lang3.StringUtils;
 
 import jline.console.ConsoleReader;
-import sk.api.Context;
 
 public class CommandReader implements Serializable {
 
@@ -18,7 +18,8 @@ public class CommandReader implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private Context context;
+	@Named("PROMP_ID")
+	private String PROMPT_ID;
 
 	@Inject
 	private CommandCompleter commandCompleter;
@@ -27,7 +28,7 @@ public class CommandReader implements Serializable {
 		ConsoleReader skReader = new ConsoleReader();
 		skReader.setHandleUserInterrupt(true);
 		skReader.addCompleter(commandCompleter);
-		String command = StringUtils.trim(skReader.readLine(context.get("PROMPT_ID") + "> "));
+		String command = StringUtils.trim(skReader.readLine(PROMPT_ID + "> "));
 		skReader.close();
 		return command;
 	}

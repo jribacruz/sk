@@ -9,6 +9,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -33,6 +34,10 @@ public class SelectorImpl implements Selector {
 
 	@Inject
 	private Context context;
+
+	@Inject
+	@Named("PROMP_ID")
+	private String PROMPT_ID;
 
 	@Inject
 	private Log log;
@@ -286,7 +291,7 @@ public class SelectorImpl implements Selector {
 	private String readConsole(String prompt) throws IOException {
 		ConsoleReader consoleReader = new ConsoleReader();
 		consoleReader.setHandleUserInterrupt(true);
-		String value = consoleReader.readLine(String.format("%s> %s: ", context.get("PROMPT_ID"), prompt));
+		String value = consoleReader.readLine(String.format("%s> %s: ", PROMPT_ID, prompt));
 		consoleReader.close();
 		return StringUtils.trim(value);
 	}

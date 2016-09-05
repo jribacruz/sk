@@ -9,12 +9,9 @@ import javax.inject.Inject;
 
 import org.apache.commons.lang3.StringUtils;
 
-import sk.api.Context;
 import sk.api.command.Command;
 import sk.api.command.CommandContext;
 import sk.api.event.AfterInit;
-import sk.api.model.EJavaProject;
-import sk.api.util.Colorize;
 import sk.impl.command.CommandContextImpl;
 
 /**
@@ -24,12 +21,6 @@ import sk.impl.command.CommandContextImpl;
  *
  */
 public class Main implements Serializable {
-
-	@Inject
-	private Context context;
-
-	@Inject
-	private EJavaProject eJavaProject;
 
 	@Inject
 	private CommandReader commandReader;
@@ -43,8 +34,6 @@ public class Main implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	public void execute(@Observes AfterInit afterInit) throws IOException {
-		context.put("PROMPT_ID",
-				String.format("%s@%s", Colorize.bold(Colorize.blue("sk")), Colorize.bold(Colorize.green(eJavaProject.getProjectName()))));
 		commandDispatcher();
 	}
 
