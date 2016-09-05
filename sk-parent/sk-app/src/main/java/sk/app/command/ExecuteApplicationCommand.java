@@ -1,10 +1,13 @@
 package sk.app.command;
 
 import java.io.IOException;
-import java.util.Arrays;
+import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import javax.inject.Inject;
+
+import sk.api.SkApplication;
 import sk.api.annotation.CommandConf;
 import sk.api.command.Command;
 import sk.api.command.CommandContext;
@@ -17,6 +20,9 @@ public class ExecuteApplicationCommand implements Command {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	@Inject
+	private Map<String, SkApplication> applications;
+
 	@Override
 	public void execute(CommandContext cmdContext) throws IOException {
 		System.out.println("Exec..");
@@ -24,7 +30,7 @@ public class ExecuteApplicationCommand implements Command {
 
 	@Override
 	public SortedSet<String> getCandidates() {
-		return new TreeSet<>(Arrays.asList("a", "b", "c"));
+		return new TreeSet<>(applications.keySet());
 	}
 
 }
