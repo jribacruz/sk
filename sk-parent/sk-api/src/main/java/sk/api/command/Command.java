@@ -2,8 +2,8 @@ package sk.api.command;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import sk.api.annotation.CommandConf;
 
@@ -11,8 +11,8 @@ public interface Command extends Serializable {
 
 	void execute(CommandContext cmdContext) throws IOException;
 
-	default List<CharSequence> getCandidates() {
-		return new ArrayList<>();
+	default SortedSet<String> getCandidates() {
+		return new TreeSet<>();
 	}
 
 	default String getUUID() {

@@ -9,6 +9,8 @@ import java.util.TreeSet;
 
 import javax.inject.Inject;
 
+import org.apache.commons.lang3.StringUtils;
+
 import jline.console.completer.Completer;
 import sk.api.command.Command;
 
@@ -30,9 +32,26 @@ public class CommandCompleter implements Completer {
 				if (!match.startsWith(buffer)) {
 					break;
 				}
-
 				candidates.add(match);
 			}
+			String[] commandTokens = StringUtils.split(buffer);
+			if (commandTokens.length > 0) {
+				Command command = commands.get(commandTokens[0]);
+				if (command != null) {
+					if (commandTokens.length == 1) {
+						candidates.addAll(command.getCandidates());
+					} else {
+						for (String match : command.getCandidates().tailSet(commandTokens[1])) {
+							if (!match.startsWith(commandTokens[1])) {
+								break;
+							}
+							candidates.add(match);
+						}
+					}
+					return command.getUUID().length() + 1;
+				}
+			}
+
 		}
 
 		return candidates.isEmpty() ? -1 : 0;

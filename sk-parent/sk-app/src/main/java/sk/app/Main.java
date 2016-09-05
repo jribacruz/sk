@@ -7,12 +7,15 @@ import java.util.Map;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 
+import org.apache.commons.lang3.StringUtils;
+
 import sk.api.Context;
 import sk.api.command.Command;
 import sk.api.command.CommandContext;
 import sk.api.event.AfterInit;
 import sk.api.model.EJavaProject;
 import sk.api.util.Colorize;
+import sk.impl.command.CommandContextImpl;
 
 /**
  * Classe que chama os aplicativos SK.
@@ -46,10 +49,13 @@ public class Main implements Serializable {
 	}
 
 	private void commandDispatcher() throws IOException {
-		CommandContext commandContext = commandReader.read();
-		if (commands.containsKey(commandContext.getCommandUUID())) {
-			Command command = commands.get(commandContext.getCommandUUID());
-			command.execute(commandContext);
+		String commandStr = commandReader.read();
+		if (StringUtils.isNotBlank(commandStr)) {
+			CommandContext commandContext = new CommandContextImpl(commandStr);
+			if (commands.containsKey(commandContext.getCommandUUID())) {
+				Command command = commands.get(commandContext.getCommandUUID());
+				command.execute(commandContext);
+			}
 		}
 		commandDispatcher();
 	}
