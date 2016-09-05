@@ -23,7 +23,7 @@ public @interface ApplicationConf {
 	String uuid();
 
 	/**
-	 * Descrição curta da finalizada da app SK.
+	 * Descrição curta da finalidade da app SK.
 	 * 
 	 * @return
 	 */
