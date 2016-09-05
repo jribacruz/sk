@@ -1,5 +1,6 @@
 package sk.api.command;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +9,7 @@ import sk.api.annotation.CommandConf;
 
 public interface Command extends Serializable {
 
-	void execute(CommandContext cmdContext);
+	void execute(CommandContext cmdContext) throws IOException;
 
 	default List<CharSequence> getCandidates() {
 		return new ArrayList<>();
