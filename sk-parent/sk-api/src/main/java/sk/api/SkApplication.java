@@ -1,5 +1,7 @@
 package sk.api;
 
+import java.io.IOException;
+
 import sk.api.annotation.ApplicationConf;
 
 /**
@@ -9,7 +11,7 @@ import sk.api.annotation.ApplicationConf;
  */
 public interface SkApplication {
 
-	public void run();
+	public void run() throws IOException;
 
 	default String getDescription() {
 		return this.getClass().getAnnotation(ApplicationConf.class).description();
