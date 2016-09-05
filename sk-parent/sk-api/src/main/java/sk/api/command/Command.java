@@ -9,7 +9,7 @@ import sk.api.annotation.CommandConf;
 
 public interface Command extends Serializable {
 
-	void execute(CommandContext cmdContext) throws IOException;
+	void execute(CommandContext commandContext) throws IOException;
 
 	default SortedSet<String> getCandidates() {
 		return new TreeSet<>();

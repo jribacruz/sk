@@ -16,7 +16,7 @@ public class ByeCommand implements Command {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	public void execute(CommandContext cmdContext) throws IOException {
+	public void execute(CommandContext commandContext) throws IOException {
 		throw new UserInterruptException("");
 	}
 

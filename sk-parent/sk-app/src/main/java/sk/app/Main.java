@@ -40,7 +40,7 @@ public class Main implements Serializable {
 	private void commandDispatcher() throws IOException {
 		String commandStr = commandReader.read();
 		if (StringUtils.isNotBlank(commandStr)) {
-			CommandContext commandContext = new CommandContextImpl(commandStr);
+			CommandContext commandContext = new CommandContextImpl(commandStr, commands);
 			if (commands.containsKey(commandContext.getCommandUUID())) {
 				Command command = commands.get(commandContext.getCommandUUID());
 				command.execute(commandContext);
