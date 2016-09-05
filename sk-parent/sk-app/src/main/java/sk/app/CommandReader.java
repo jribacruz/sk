@@ -29,9 +29,9 @@ public class CommandReader implements Serializable {
 		ConsoleReader skReader = new ConsoleReader();
 		skReader.setHandleUserInterrupt(true);
 		skReader.addCompleter(commandCompleter);
-		String uuid = skReader.readLine(context.get("PROMPT_ID") + "> ");
+		String command = skReader.readLine(context.get("PROMPT_ID") + "> ");
 		skReader.close();
-		return new CommandContextImpl(StringUtils.trim(uuid));
+		return new CommandContextImpl(StringUtils.trim(command));
 	}
 
 }

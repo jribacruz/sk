@@ -32,14 +32,13 @@ public class CommandContextImpl implements CommandContext {
 		List<String> commandTokens = Arrays.asList(StringUtils.split(commandInput));
 		this.commandUUID = commandTokens.get(0);
 		this.params = commandTokens.size() > 1 ? commandTokens.subList(1, commandTokens.size()) : new ArrayList<>();
+		System.out.println(this.params);
 	}
 
 	@Override
 	public Optional<String> getParamByIndex(int index) {
-		if (this.params == null) {
-			if (index < params.size()) {
-				return Optional.of(params.get(index));
-			}
+		if (index < params.size()) {
+			return Optional.of(params.get(index));
 		}
 		return Optional.empty();
 	}
