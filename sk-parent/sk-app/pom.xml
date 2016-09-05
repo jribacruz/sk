@@ -35,6 +35,11 @@
 			<version>1.0</version>
 			<scope>compile</scope>
 		</dependency>
+		<dependency>
+			<groupId>sk.artifacts</groupId>
+			<artifactId>sk-hello</artifactId>
+			<version>1.0</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>
