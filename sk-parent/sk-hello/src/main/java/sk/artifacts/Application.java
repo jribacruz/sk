@@ -14,7 +14,7 @@ public class Application implements SkApplication {
 
 	@Override
 	public void run() throws IOException {
-		System.out.println("It's works!");
+		System.out.println("It works!");
 	}
 
 }
