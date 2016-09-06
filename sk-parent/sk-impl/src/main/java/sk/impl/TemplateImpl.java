@@ -10,7 +10,7 @@ import sk.api.Context;
 import sk.api.FS;
 import sk.api.Template;
 import sk.api.model.EPath;
-import sk.api.util.Log;
+import sk.api.util.Colorize;
 
 public class TemplateImpl implements Template {
 
@@ -22,8 +22,6 @@ public class TemplateImpl implements Template {
 	private Context context = Beans.getReference(Context.class);
 
 	private FS fs = Beans.getReference(FS.class);
-
-	private Log log = Beans.getReference(Log.class);
 
 	/*
 	 * (non-Javadoc)
@@ -45,7 +43,7 @@ public class TemplateImpl implements Template {
 			fs.mkdir(fs.getEpath(epath.getPath().getParent()));
 			fs.write(epath.getPath(), content);
 		} catch (ResourceNotFoundException e) {
-			log.error("Template não existe: %s ", templateName);
+			System.out.println(String.format(Colorize.red("Template não existe: %s "), templateName));
 		}
 	}
 

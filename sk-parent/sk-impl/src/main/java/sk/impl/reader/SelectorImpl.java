@@ -23,7 +23,6 @@ import sk.api.exception.EmptyParamOptionException;
 import sk.api.reader.Selectable;
 import sk.api.reader.Selector;
 import sk.api.util.Colorize;
-import sk.api.util.Log;
 
 public class SelectorImpl implements Selector {
 
@@ -38,9 +37,6 @@ public class SelectorImpl implements Selector {
 	@Inject
 	@Named("PROMP_ID")
 	private String PROMPT_ID;
-
-	@Inject
-	private Log log;
 
 	private String selectOneErrorMessage = "Opção inválida: %s. Escolha apenas um valor entre 1 e %d.";
 
@@ -204,7 +200,7 @@ public class SelectorImpl implements Selector {
 			}
 			return;
 		}
-		log.warn(String.format(confirmErrorMessage, value));
+		System.out.println(String.format(Colorize.yellow(confirmErrorMessage), value));
 		confirm(message, taskOption);
 	}
 
@@ -244,7 +240,7 @@ public class SelectorImpl implements Selector {
 				return options.get(option);
 			}
 		}
-		log.warn(String.format(selectOneErrorMessage, value, options.size()));
+		System.out.println(String.format(Colorize.yellow(selectOneErrorMessage), value, options.size()));
 		return readSelectOne(options, message);
 	}
 
@@ -275,7 +271,7 @@ public class SelectorImpl implements Selector {
 				//@formatter:on
 			}
 		}
-		log.warn(String.format(selectManyErrorMessage, value, options.size()));
+		System.out.println(String.format(Colorize.yellow(selectManyErrorMessage), value, options.size()));
 		return readSelectMany(options, message);
 	}
 
