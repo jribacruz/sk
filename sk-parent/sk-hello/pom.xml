@@ -103,5 +103,11 @@
 			<artifactId>sk-api</artifactId>
 			<version>1.0</version>
 		</dependency>
+		<dependency>
+			<groupId>sk</groupId>
+			<artifactId>sk-impl</artifactId>
+			<version>1.0</version>
+			<scope>runtime</scope>
+		</dependency>
 	</dependencies>
 </project>
