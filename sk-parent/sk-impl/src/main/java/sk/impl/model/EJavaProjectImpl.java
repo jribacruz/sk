@@ -168,16 +168,6 @@ public class EJavaProjectImpl implements EJavaProject {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see sk4j.model.EJavaProject#isGradleProject()
-	 */
-	@Override
-	public boolean isGradleProject() {
-		return new File(String.format("%s/build.gradle", getPathName())).exists();
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see sk4j.model.EJavaProject#getSrcMainJavaClasses()
 	 */
 	@Override

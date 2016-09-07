@@ -54,6 +54,4 @@ public interface EJavaProject extends Serializable {
 
 	public boolean isMavenProject();
 
-	public boolean isGradleProject();
-
 }
