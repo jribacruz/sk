@@ -8,7 +8,7 @@ import java.util.TreeSet;
 
 import javax.inject.Inject;
 
-import sk.api.SkApplication;
+import sk.api.Application;
 import sk.api.annotation.CommandConf;
 import sk.api.command.Command;
 import sk.api.command.CommandContext;
@@ -23,13 +23,13 @@ public class ExecuteApplicationCommand implements Command {
 	private static final long serialVersionUID = 1L;
 
 	@Inject
-	private Map<String, SkApplication> applications;
+	private Map<String, Application> applications;
 
 	@Override
 	public void execute(CommandContext cmdContext) throws IOException {
 		Optional<String> cmdApplicationParam = cmdContext.getParamByIndex(0);
 		if (cmdApplicationParam.isPresent()) {
-			SkApplication application = applications.get(cmdApplicationParam.get());
+			Application application = applications.get(cmdApplicationParam.get());
 			if (application != null) {
 				System.out.println(Colorize.yellow(String.format("\n> [ENTER] %s\n", application.getUUID())));
 				application.run();

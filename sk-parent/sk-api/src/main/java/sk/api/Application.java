@@ -9,7 +9,7 @@ import sk.api.annotation.ApplicationConf;
  * @author jcruz
  *
  */
-public interface SkApplication {
+public interface Application {
 
 	public void run() throws IOException;
 
