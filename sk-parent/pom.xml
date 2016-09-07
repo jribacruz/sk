@@ -153,6 +153,7 @@
 							</manifest>
 						</archive>
 						<outputDirectory>${user.home}/sk/bin/</outputDirectory>
+						<finalName>sk-app</finalName>       
 					</configuration>
 				</plugin>
 				<!-- COPIA AS DEPENDÊNCIAS PARA A PASTA LIB -->
