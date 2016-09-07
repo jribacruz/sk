@@ -2,6 +2,7 @@ package sk.app;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Optional;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -24,13 +25,13 @@ public class CommandReader implements Serializable {
 	@Inject
 	private CommandCompleter commandCompleter;
 
-	public String read() throws IOException {
+	public Optional<String> read() throws IOException {
 		ConsoleReader skReader = new ConsoleReader();
 		skReader.setHandleUserInterrupt(true);
 		skReader.addCompleter(commandCompleter);
 		String command = StringUtils.trim(skReader.readLine(PROMPT_ID + "> "));
 		skReader.close();
-		return command;
+		return StringUtils.isNotBlank(command) ? Optional.of(command) : Optional.empty();
 	}
 
 }
