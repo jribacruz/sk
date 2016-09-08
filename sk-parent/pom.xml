@@ -136,50 +136,8 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		<pluginManagement>
-			<!-- SETA AS DEPENDÊNCIAS NO CLASSPATH DO JAR -->
-			<plugins>
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-jar-plugin</artifactId>
-					<configuration>
-						<archive>
-							<manifest>
-								<addClasspath>true</addClasspath>
-								<classpathPrefix>dependencies</classpathPrefix>
-								<mainClass>sk.app.Bootstrap</mainClass>
-								<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-								<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-							</manifest>
-						</archive>
-						<outputDirectory>${user.home}/sk/bin/</outputDirectory>
-						<finalName>sk-app</finalName>       
-					</configuration>
-				</plugin>
-				<!-- COPIA AS DEPENDÊNCIAS PARA A PASTA LIB -->
-				<plugin>
-					<groupId>org.apache.maven.plugins</groupId>
-					<artifactId>maven-dependency-plugin</artifactId>
-					<version>2.10</version>
-					<executions>
-						<execution>
-							<id>copy-dependencies</id>
-							<phase>install</phase>
-							<goals>
-								<goal>copy-dependencies</goal>
-							</goals>
-							<configuration>
-								<outputDirectory>${user.home}/sk/bin/dependencies/</outputDirectory>
-								<overWriteReleases>false</overWriteReleases>
-								<overWriteSnapshots>false</overWriteSnapshots>
-								<overWriteIfNewer>true</overWriteIfNewer>
-							</configuration>
-						</execution>
-					</executions>
-				</plugin>
-			</plugins>
-		</pluginManagement>
 	</build>
+	
 	<modules>
 		<module>sk-api</module>
 		<module>sk-app</module>
