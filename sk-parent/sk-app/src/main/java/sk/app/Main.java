@@ -21,9 +21,15 @@ import sk.impl.command.CommandContextImpl;
  */
 public class Main implements Serializable {
 
+	/*
+	 * Leitor de comandos
+	 */
 	@Inject
 	private CommandReader commandReader;
 
+	/*
+	 * Lista de comandos SK.
+	 */
 	@Inject
 	private Map<String, Command> commands;
 
