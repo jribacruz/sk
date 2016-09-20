@@ -2,7 +2,6 @@ package sk.impl.model;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -12,11 +11,9 @@ import org.apache.commons.io.FilenameUtils;
 
 import com.thoughtworks.qdox.JavaDocBuilder;
 
-import sk.api.model.EFile;
 import sk.api.model.EJavaClass;
 import sk.api.model.EJavaPackage;
 import sk.api.model.EJavaProject;
-import sk.api.model.EPath;
 
 public class EJavaProjectImpl implements EJavaProject {
 
@@ -38,16 +35,6 @@ public class EJavaProjectImpl implements EJavaProject {
 	private SortedSet<EJavaPackage> mainEJavaPackages;
 
 	private SortedSet<EJavaPackage> testEJavaPackages;
-
-	private SortedSet<EPath> webappEPaths;
-
-	private SortedSet<EFile> webappEFiles;
-
-	private SortedSet<EPath> epaths;
-
-	private SortedSet<EFile> efiles;
-
-	private SortedSet<EFile> webappXHTMLFiles;
 
 	public EJavaProjectImpl(File file) {
 		super();
@@ -105,54 +92,13 @@ public class EJavaProjectImpl implements EJavaProject {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see sk4j.model.EJavaProject#getDirs()
-	 */
-	@Override
-	public SortedSet<EPath> getEPaths() throws IOException {
-		//@formatter:off
-		if (this.epaths == null) {
-			this.epaths = Files.walk(file.toPath())
-							 .filter(p -> p.toFile().isDirectory() && 
-									 	 !p.toFile().isHidden() && 
-									 	 !p.toFile().getAbsolutePath().contains(".svn") &&
-									 	 !p.toFile().getAbsolutePath().contains("/target"))
-							 .map(EPathImpl::new)
-							 .collect(Collectors.toCollection(TreeSet::new));
-		}
-		//@formatter:on
-		return epaths;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see sk4j.model.EJavaProject#getFiles()
-	 */
-	@Override
-	public SortedSet<EFile> getEFiles() throws IOException {
-		if (this.efiles == null) {
-			//@formatter:off
-			this.efiles = Files.walk(file.toPath())
-							  .filter(p -> p.toFile().isFile() && !p.toFile().isHidden())
-							  .map(p -> new EFileImpl(p.toFile()))
-							  .collect(Collectors.toCollection(TreeSet::new));
-			//@formatter:on
-		}
-		return efiles;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see sk4j.model.EJavaProject#hasSrcMainJavaClassByName(java.lang.String)
 	 */
 	@Override
 	public boolean hasMainEJavaClassByName(String name) throws IOException {
-		//@formatter:off
-		return getMainEJavaClasses()
-			.stream()
-			.anyMatch(javaClass -> javaClass.getClassName().equals(name));
-		//@formatter:on
+		// @formatter:off
+		return getMainEJavaClasses().stream().anyMatch(javaClass -> javaClass.getClassName().equals(name));
+		// @formatter:on
 	}
 
 	/*
@@ -173,15 +119,15 @@ public class EJavaProjectImpl implements EJavaProject {
 	@Override
 	public SortedSet<EJavaClass> getMainEJavaClasses() {
 		if (this.mainEJavaClasses == null) {
-			//@formatter:off
-			this.mainEJavaClasses = getMainEJavaPackages()
-							.parallelStream()
-							.map(javaPackage -> javaPackage.getQdoxJavaPackage().getClasses())
-							.flatMap(qdoxJavaClasses -> Arrays.asList(qdoxJavaClasses).stream())
-							.map(qdoxJavaClass -> new EJavaClassImpl(this, "/src/main/java/", qdoxJavaClass))
-							.filter(javaClass -> !javaClass.getQdoxJavaClass().isInterface() && !javaClass.getQdoxJavaClass().isEnum())
-							.collect(Collectors.toCollection(TreeSet::new));
-			//@formatter:on
+			// @formatter:off
+			this.mainEJavaClasses = getMainEJavaPackages().parallelStream()
+					.map(javaPackage -> javaPackage.getQdoxJavaPackage().getClasses())
+					.flatMap(qdoxJavaClasses -> Arrays.asList(qdoxJavaClasses).stream())
+					.map(qdoxJavaClass -> new EJavaClassImpl(this, "/src/main/java/", qdoxJavaClass))
+					.filter(javaClass -> !javaClass.getQdoxJavaClass().isInterface()
+							&& !javaClass.getQdoxJavaClass().isEnum())
+					.collect(Collectors.toCollection(TreeSet::new));
+			// @formatter:on
 		}
 		return mainEJavaClasses;
 	}
@@ -194,15 +140,15 @@ public class EJavaProjectImpl implements EJavaProject {
 	@Override
 	public SortedSet<EJavaClass> getTestEJavaClasses() {
 		if (this.testEJavaClasses == null) {
-			//@formatter:off
-			this.testEJavaClasses = getTestEJavaPackages()
-							.stream()
-							.map(javaPackage -> javaPackage.getQdoxJavaPackage().getClasses())
-							.flatMap(qdoxJavaClasses -> Arrays.asList(qdoxJavaClasses).stream())
-							.map(qdoxJavaClass -> new EJavaClassImpl(this, "/src/test/java/", qdoxJavaClass))
-							.filter(javaClass -> !javaClass.getQdoxJavaClass().isInterface() && !javaClass.getQdoxJavaClass().isEnum())
-							.collect(Collectors.toCollection(TreeSet::new));
-			//@formatter:on
+			// @formatter:off
+			this.testEJavaClasses = getTestEJavaPackages().stream()
+					.map(javaPackage -> javaPackage.getQdoxJavaPackage().getClasses())
+					.flatMap(qdoxJavaClasses -> Arrays.asList(qdoxJavaClasses).stream())
+					.map(qdoxJavaClass -> new EJavaClassImpl(this, "/src/test/java/", qdoxJavaClass))
+					.filter(javaClass -> !javaClass.getQdoxJavaClass().isInterface()
+							&& !javaClass.getQdoxJavaClass().isEnum())
+					.collect(Collectors.toCollection(TreeSet::new));
+			// @formatter:on
 		}
 		return testEJavaClasses;
 	}
@@ -219,52 +165,13 @@ public class EJavaProjectImpl implements EJavaProject {
 			File srcMainJavaDir = new File(FilenameUtils.normalize(getPathName().concat("/src/main/java/")));
 			builder.addSourceTree(srcMainJavaDir);
 
-			//@formatter:off
-			this.mainEJavaPackages = Arrays.asList(builder.getPackages())
-					.stream()
-					.map(javaPackage -> new EJavaPackageImpl(this, javaPackage , "/src/main/java/"))
+			// @formatter:off
+			this.mainEJavaPackages = Arrays.asList(builder.getPackages()).stream()
+					.map(javaPackage -> new EJavaPackageImpl(this, javaPackage, "/src/main/java/"))
 					.collect(Collectors.toCollection(TreeSet::new));
-			//@formatter:on
+			// @formatter:on
 		}
 		return this.mainEJavaPackages;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see sk4j.model.EJavaProject#getSrcMainWebappDirs()
-	 */
-	@Override
-	public SortedSet<EPath> getWebappEPaths() throws IOException {
-		if (this.webappEPaths == null) {
-			//@formatter:off
-			this.webappEPaths= Files.walk(file.toPath())
-					 				.filter(path -> path.toFile().isDirectory() && !path.toFile().isHidden())
-					 				.filter(dir -> dir.toFile().getAbsolutePath().contains("/src/main/webapp/"))
-					 				.map(EPathImpl::new)
-					 				.collect(Collectors.toCollection(TreeSet::new));
-			//@formatter:on
-		}
-		return webappEPaths;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see sk4j.model.EJavaProject#getSrcMainWebappFiles()
-	 */
-	@Override
-	public SortedSet<EFile> getWebappEFiles() throws IOException {
-		if (this.webappEFiles == null) {
-			//@formatter:off
-			this.webappEFiles = Files.walk(file.toPath())
-					 				.filter(path -> path.toFile().isFile() && !path.toFile().isHidden())
-					 				.filter(file -> file.toFile().getAbsolutePath().contains("/src/main/webapp/"))
-					 				.map(path -> new EFileImpl(path.toFile()))
-					 				.collect(Collectors.toCollection(TreeSet::new));
-			//@formatter:on
-		}
-		return webappEFiles;
 	}
 
 	/*
@@ -279,32 +186,13 @@ public class EJavaProjectImpl implements EJavaProject {
 			File srcTestJavaDir = new File(FilenameUtils.normalize(getPathName().concat("/src/test/java/")));
 			builder.addSourceTree(srcTestJavaDir);
 
-			//@formatter:off
-			this.testEJavaPackages = Arrays.asList(builder.getPackages())
-										.stream()
-										.map(javaPackage -> new EJavaPackageImpl(this, javaPackage , "/src/test/java/"))
-										.collect(Collectors.toCollection(TreeSet::new));
-			//@formatter:on
+			// @formatter:off
+			this.testEJavaPackages = Arrays.asList(builder.getPackages()).stream()
+					.map(javaPackage -> new EJavaPackageImpl(this, javaPackage, "/src/test/java/"))
+					.collect(Collectors.toCollection(TreeSet::new));
+			// @formatter:on
 		}
 		return this.testEJavaPackages;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see sk4j.model.EJavaProject#getSrcMainWebappXHTMLFiles()
-	 */
-	@Override
-	public SortedSet<EFile> getWebappXHTMLFiles() throws IOException {
-		if (this.webappXHTMLFiles == null) {
-			//@formatter:off
-			this.webappXHTMLFiles = getWebappEFiles()
-												.stream()
-												.filter(file -> file.getFile().getName().endsWith(".xhtml"))
-												.collect(Collectors.toCollection(TreeSet::new));
-			//@formatter:on
-		}
-		return webappXHTMLFiles;
 	}
 
 	@Override

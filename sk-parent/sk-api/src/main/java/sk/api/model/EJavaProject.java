@@ -28,6 +28,11 @@ public interface EJavaProject extends Serializable {
 	 */
 	String getPathName();
 
+	/**
+	 * Retorna o arquivo do projeto java.
+	 * 
+	 * @return
+	 */
 	File getProjectFile();
 
 	SortedSet<EJavaClass> getAllEJavaClasses() throws IOException;
@@ -39,16 +44,6 @@ public interface EJavaProject extends Serializable {
 	SortedSet<EJavaPackage> getTestEJavaPackages();
 
 	SortedSet<EJavaClass> getTestEJavaClasses();
-
-	SortedSet<EPath> getWebappEPaths() throws IOException;
-
-	SortedSet<EFile> getWebappEFiles() throws IOException;
-
-	SortedSet<EFile> getWebappXHTMLFiles() throws IOException;
-
-	SortedSet<EPath> getEPaths() throws IOException;
-
-	SortedSet<EFile> getEFiles() throws IOException;
 
 	boolean hasMainEJavaClassByName(String javaClassName) throws IOException;
 
