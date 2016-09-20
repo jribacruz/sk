@@ -121,7 +121,7 @@
 	<repositories>
 		<repository>
 			<id>jcenter-repo</id>
-			<url>https://dl.bintray.com/jaycroaker/maven</url>
+			<url>http://dl.bintray.com/jtwig/maven</url>
 		</repository>
 	</repositories>
 

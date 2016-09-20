@@ -4,13 +4,10 @@ import java.io.IOException;
 
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
-import org.jtwig.resource.exceptions.ResourceNotFoundException;
 
 import sk.api.Context;
-import sk.api.FS;
 import sk.api.Template;
 import sk.api.model.EPath;
-import sk.api.util.Colorize;
 
 public class TemplateImpl implements Template {
 
@@ -21,7 +18,6 @@ public class TemplateImpl implements Template {
 
 	private Context context = Beans.getReference(Context.class);
 
-	private FS fs = Beans.getReference(FS.class);
 
 	/*
 	 * (non-Javadoc)
@@ -38,13 +34,7 @@ public class TemplateImpl implements Template {
 	 */
 	@Override
 	public void mergeAndCreateFile(String templateName, EPath epath) throws IOException {
-		try {
-			String content = this.merge(templateName);
-			fs.mkdir(fs.getEpath(epath.getPath().getParent()));
-			fs.write(epath.getPath(), content);
-		} catch (ResourceNotFoundException e) {
-			System.out.println(String.format(Colorize.red("Template não existe: %s "), templateName));
-		}
+		throw new UnsupportedOperationException();
 	}
 
 	/*
