@@ -37,12 +37,41 @@ public interface EJavaProject extends Serializable {
 	 */
 	File getProjectFile();
 
+	/**
+	 * 
+	 * Lista as classes do Maven Folder correspondente.
+	 * 
+	 * @param mf
+	 *            MavenFolder
+	 * @return Lista ordenada das classes do MavenFolder correspondete.
+	 */
 	SortedSet<EJavaClass> getEJavaClasses(MavenFolder mf);
 
+	/**
+	 * 
+	 * Lista todos os pacotes do Maven Folder correspondente.
+	 * 
+	 * @param mf
+	 * @return
+	 */
 	SortedSet<EJavaPackage> getEJavaPackages(MavenFolder mf);
 
+	/**
+	 * Verifica a existência de uma classe em src/main/java
+	 * 
+	 * @param javaClassName
+	 *            Nome da classe.
+	 * @return
+	 * @throws IOException
+	 */
 	boolean hasMainEJavaClassByName(String javaClassName) throws IOException;
 
+	/**
+	 * 
+	 * Verifica se o project
+	 * 
+	 * @return
+	 */
 	public boolean isMavenProject();
 
 }
