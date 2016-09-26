@@ -9,8 +9,11 @@ import java.util.stream.Collectors;
 
 import org.apache.commons.io.FilenameUtils;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 import com.thoughtworks.qdox.JavaDocBuilder;
 
+import sk.api.enums.MavenFolder;
 import sk.api.model.EJavaClass;
 import sk.api.model.EJavaPackage;
 import sk.api.model.EJavaProject;
@@ -26,15 +29,9 @@ public class EJavaProjectImpl implements EJavaProject {
 
 	private File file;
 
-	private SortedSet<EJavaClass> allEJavaClasses;
+	private Multimap<MavenFolder, EJavaClass> cacheEJavaClassesMMap = HashMultimap.create();
 
-	private SortedSet<EJavaClass> mainEJavaClasses;
-
-	private SortedSet<EJavaClass> testEJavaClasses;
-
-	private SortedSet<EJavaPackage> mainEJavaPackages;
-
-	private SortedSet<EJavaPackage> testEJavaPackages;
+	private Multimap<MavenFolder, EJavaPackage> cacheEJavaPackagesMMap = HashMultimap.create();
 
 	public EJavaProjectImpl(File file) {
 		super();
@@ -77,28 +74,11 @@ public class EJavaProjectImpl implements EJavaProject {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see sk4j.model.EJavaProject#getJavaClasses()
-	 */
-	@Override
-	public SortedSet<EJavaClass> getAllEJavaClasses() throws IOException {
-		if (allEJavaClasses == null) {
-			this.allEJavaClasses = new TreeSet<>();
-			this.allEJavaClasses.addAll(getMainEJavaClasses());
-			this.allEJavaClasses.addAll(getTestEJavaClasses());
-		}
-		return allEJavaClasses;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
 	 * @see sk4j.model.EJavaProject#hasSrcMainJavaClassByName(java.lang.String)
 	 */
 	@Override
 	public boolean hasMainEJavaClassByName(String name) throws IOException {
-		// @formatter:off
-		return getMainEJavaClasses().stream().anyMatch(javaClass -> javaClass.getClassName().equals(name));
-		// @formatter:on
+		return this.getEJavaClasses(MavenFolder.SRC_MAIN_JAVA).stream().anyMatch(javaClass -> javaClass.getClassName().equals(name));
 	}
 
 	/*
@@ -114,85 +94,44 @@ public class EJavaProjectImpl implements EJavaProject {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see sk4j.model.EJavaProject#getSrcMainJavaClasses()
+	 * @see sk.api.model.EJavaProject#getEJavaClasses(sk.api.enums.MavenFolder)
 	 */
 	@Override
-	public SortedSet<EJavaClass> getMainEJavaClasses() {
-		if (this.mainEJavaClasses == null) {
+	public SortedSet<EJavaClass> getEJavaClasses(MavenFolder mf) {
+		if (!cacheEJavaClassesMMap.containsKey(mf)) {
 			// @formatter:off
-			this.mainEJavaClasses = getMainEJavaPackages().parallelStream()
+			SortedSet<EJavaClass> eJavaClasses = getEJavaPackages(mf).stream()
 					.map(javaPackage -> javaPackage.getQdoxJavaPackage().getClasses())
 					.flatMap(qdoxJavaClasses -> Arrays.asList(qdoxJavaClasses).stream())
-					.map(qdoxJavaClass -> new EJavaClassImpl(this, "/src/main/java/", qdoxJavaClass))
+					.map(qdoxJavaClass -> new EJavaClassImpl(this, mf.getPath(), qdoxJavaClass))
 					.filter(javaClass -> !javaClass.getQdoxJavaClass().isInterface()
 							&& !javaClass.getQdoxJavaClass().isEnum())
 					.collect(Collectors.toCollection(TreeSet::new));
 			// @formatter:on
+			cacheEJavaClassesMMap.putAll(mf, eJavaClasses);
 		}
-		return mainEJavaClasses;
+		return new TreeSet<>(this.cacheEJavaClassesMMap.get(mf));
 	}
 
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see sk4j.model.EJavaProject#getSrcTestJavaClasses()
+	 * @see sk.api.model.EJavaProject#getEJavaPackages(sk.api.enums.MavenFolder)
 	 */
 	@Override
-	public SortedSet<EJavaClass> getTestEJavaClasses() {
-		if (this.testEJavaClasses == null) {
-			// @formatter:off
-			this.testEJavaClasses = getTestEJavaPackages().stream()
-					.map(javaPackage -> javaPackage.getQdoxJavaPackage().getClasses())
-					.flatMap(qdoxJavaClasses -> Arrays.asList(qdoxJavaClasses).stream())
-					.map(qdoxJavaClass -> new EJavaClassImpl(this, "/src/test/java/", qdoxJavaClass))
-					.filter(javaClass -> !javaClass.getQdoxJavaClass().isInterface()
-							&& !javaClass.getQdoxJavaClass().isEnum())
-					.collect(Collectors.toCollection(TreeSet::new));
-			// @formatter:on
-		}
-		return testEJavaClasses;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see sk4j.model.EJavaProject#getSrcMainJavaPackages()
-	 */
-	@Override
-	public SortedSet<EJavaPackage> getMainEJavaPackages() {
-		if (this.mainEJavaPackages == null) {
+	public SortedSet<EJavaPackage> getEJavaPackages(MavenFolder mf) {
+		if (!cacheEJavaPackagesMMap.containsKey(mf)) {
 			JavaDocBuilder builder = new JavaDocBuilder();
-			File srcMainJavaDir = new File(FilenameUtils.normalize(getPathName().concat("/src/main/java/")));
-			builder.addSourceTree(srcMainJavaDir);
-
+			File javaDir = new File(FilenameUtils.normalize(getPathName().concat(mf.getPath())));
+			builder.addSourceTree(javaDir);
 			// @formatter:off
-			this.mainEJavaPackages = Arrays.asList(builder.getPackages()).stream()
-					.map(javaPackage -> new EJavaPackageImpl(this, javaPackage, "/src/main/java/"))
+			SortedSet<EJavaPackage> eJavaPackages = Arrays.asList(builder.getPackages()).stream()
+					.map(javaPackage -> new EJavaPackageImpl(this, javaPackage, mf.getPath()))
 					.collect(Collectors.toCollection(TreeSet::new));
-			// @formatter:on
+			//@formatter:on
+			this.cacheEJavaPackagesMMap.putAll(mf, eJavaPackages);
 		}
-		return this.mainEJavaPackages;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see sk4j.model.EJavaProject#getSrcTestJavaPackages()
-	 */
-	@Override
-	public SortedSet<EJavaPackage> getTestEJavaPackages() {
-		if (this.testEJavaPackages == null) {
-			JavaDocBuilder builder = new JavaDocBuilder();
-			File srcTestJavaDir = new File(FilenameUtils.normalize(getPathName().concat("/src/test/java/")));
-			builder.addSourceTree(srcTestJavaDir);
-
-			// @formatter:off
-			this.testEJavaPackages = Arrays.asList(builder.getPackages()).stream()
-					.map(javaPackage -> new EJavaPackageImpl(this, javaPackage, "/src/test/java/"))
-					.collect(Collectors.toCollection(TreeSet::new));
-			// @formatter:on
-		}
-		return this.testEJavaPackages;
+		return new TreeSet<>(this.cacheEJavaPackagesMMap.get(mf));
 	}
 
 	@Override

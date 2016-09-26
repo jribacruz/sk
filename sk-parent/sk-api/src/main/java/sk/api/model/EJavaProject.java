@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.SortedSet;
 
+import sk.api.enums.MavenFolder;
+
 /**
  * 
  * Representação de um projeto java.
@@ -35,15 +37,9 @@ public interface EJavaProject extends Serializable {
 	 */
 	File getProjectFile();
 
-	SortedSet<EJavaClass> getAllEJavaClasses() throws IOException;
+	SortedSet<EJavaClass> getEJavaClasses(MavenFolder mf);
 
-	SortedSet<EJavaClass> getMainEJavaClasses();
-
-	SortedSet<EJavaPackage> getMainEJavaPackages();
-
-	SortedSet<EJavaPackage> getTestEJavaPackages();
-
-	SortedSet<EJavaClass> getTestEJavaClasses();
+	SortedSet<EJavaPackage> getEJavaPackages(MavenFolder mf);
 
 	boolean hasMainEJavaClassByName(String javaClassName) throws IOException;
 
