@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -53,6 +54,16 @@ public class XMLParser {
 			System.out.println(Colorize.red("Erro: " + e.getMessage()));
 		}
 		return nodes;
+	}
+
+	public Optional<Node> getNodeByXPathExpression(String expression) {
+		try {
+			Node node = (Node) this.xpath.compile(expression).evaluate(doc, XPathConstants.NODE);
+			return Optional.ofNullable(node);
+		} catch (XPathExpressionException e) {
+			System.out.println(Colorize.red("Erro: " + e.getMessage()));
+		}
+		return Optional.empty();
 	}
 
 }

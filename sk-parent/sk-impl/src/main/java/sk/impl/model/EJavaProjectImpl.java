@@ -1,12 +1,19 @@
 package sk.impl.model;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
+import javax.xml.parsers.ParserConfigurationException;
+
 import org.apache.commons.io.FilenameUtils;
+import org.xml.sax.SAXException;
 
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
@@ -28,6 +35,8 @@ public class EJavaProjectImpl implements EJavaProject {
 	private String name;
 
 	private File file;
+
+	private Map<MavenFolder, EPersistence> cachePersistenceMap = new HashMap<>();
 
 	private Multimap<MavenFolder, EJavaClass> cacheEJavaClassesMMap = HashMultimap.create();
 
@@ -82,8 +91,16 @@ public class EJavaProjectImpl implements EJavaProject {
 	}
 
 	@Override
-	public EPersistence getEPersistence(MavenFolder mf) {
-		throw new UnsupportedOperationException();
+	public Optional<EPersistence> getEPersistence(MavenFolder mf) {
+		if (!cachePersistenceMap.containsKey(mf)) {
+			try {
+				EPersistence ePersistence = new EPersistenceImpl(this, mf);
+				this.cachePersistenceMap.put(mf, ePersistence);
+			} catch (SAXException | IOException | ParserConfigurationException e) {
+				System.out.println("Erro: " + e.getMessage());
+			}
+		}
+		return Optional.of(this.cachePersistenceMap.get(mf));
 	}
 
 	/*

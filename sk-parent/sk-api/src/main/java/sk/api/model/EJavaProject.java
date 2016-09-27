@@ -3,6 +3,7 @@ package sk.api.model;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Optional;
 import java.util.SortedSet;
 
 import sk.api.enums.MavenFolder;
@@ -73,7 +74,7 @@ public interface EJavaProject extends Serializable {
 	 * @param mf
 	 * @return
 	 */
-	public EPersistence getEPersistence(MavenFolder mf);
+	public Optional<EPersistence> getEPersistence(MavenFolder mf);
 
 	/**
 	 * 
