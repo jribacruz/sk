@@ -77,8 +77,8 @@ public class EJavaProjectImpl implements EJavaProject {
 	 * @see sk4j.model.EJavaProject#hasSrcMainJavaClassByName(java.lang.String)
 	 */
 	@Override
-	public boolean hasMainEJavaClassByName(String name) throws IOException {
-		return this.getEJavaClasses(MavenFolder.SRC_MAIN_JAVA).stream().anyMatch(javaClass -> javaClass.getClassName().equals(name));
+	public boolean hasEJavaClassByName(MavenFolder mf, String name) throws IOException {
+		return this.getEJavaClasses(mf).stream().anyMatch(javaClass -> javaClass.getClassName().equals(name));
 	}
 
 	/*

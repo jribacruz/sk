@@ -57,14 +57,14 @@ public interface EJavaProject extends Serializable {
 	SortedSet<EJavaPackage> getEJavaPackages(MavenFolder mf);
 
 	/**
-	 * Verifica a existência de uma classe em src/main/java
+	 * Verifica a existência de uma classe no maven folder especificado.
 	 * 
 	 * @param javaClassName
 	 *            Nome da classe.
 	 * @return
 	 * @throws IOException
 	 */
-	boolean hasMainEJavaClassByName(String javaClassName) throws IOException;
+	boolean hasEJavaClassByName(MavenFolder mf, String javaClassName) throws IOException;
 
 	/**
 	 * 
