@@ -64,7 +64,16 @@ public interface EJavaProject extends Serializable {
 	 * @return
 	 * @throws IOException
 	 */
-	boolean hasEJavaClassByName(MavenFolder mf, String javaClassName) throws IOException;
+	boolean hasEJavaClassByName(MavenFolder mf, String javaClassName);
+
+	/**
+	 * 
+	 * Retorna a unidade de persistência do maven folder indicado..
+	 * 
+	 * @param mf
+	 * @return
+	 */
+	public EPersistence getEPersistence(MavenFolder mf);
 
 	/**
 	 * 

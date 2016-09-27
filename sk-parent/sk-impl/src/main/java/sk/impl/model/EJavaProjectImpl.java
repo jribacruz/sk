@@ -1,7 +1,6 @@
 package sk.impl.model;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -17,6 +16,7 @@ import sk.api.enums.MavenFolder;
 import sk.api.model.EJavaClass;
 import sk.api.model.EJavaPackage;
 import sk.api.model.EJavaProject;
+import sk.api.model.EPersistence;
 
 public class EJavaProjectImpl implements EJavaProject {
 
@@ -77,8 +77,13 @@ public class EJavaProjectImpl implements EJavaProject {
 	 * @see sk4j.model.EJavaProject#hasSrcMainJavaClassByName(java.lang.String)
 	 */
 	@Override
-	public boolean hasEJavaClassByName(MavenFolder mf, String name) throws IOException {
+	public boolean hasEJavaClassByName(MavenFolder mf, String name) {
 		return this.getEJavaClasses(mf).stream().anyMatch(javaClass -> javaClass.getClassName().equals(name));
+	}
+
+	@Override
+	public EPersistence getEPersistence(MavenFolder mf) {
+		throw new UnsupportedOperationException();
 	}
 
 	/*
