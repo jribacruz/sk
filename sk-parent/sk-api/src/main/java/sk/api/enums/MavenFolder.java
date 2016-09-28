@@ -39,7 +39,12 @@ public enum MavenFolder {
 	/**
 	 * 
 	 */
-	TARGET("/target/");
+	TARGET("/target/"),
+
+	/**
+	 * 
+	 */
+	ROOT("/");
 
 	private String path;
 

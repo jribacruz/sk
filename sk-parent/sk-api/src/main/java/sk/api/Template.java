@@ -3,7 +3,7 @@ package sk.api;
 import java.io.IOException;
 import java.io.Serializable;
 
-import sk.api.model.EPath;
+import sk.api.enums.MavenFolder;
 
 /**
  * 
@@ -23,7 +23,8 @@ public interface Template extends Serializable {
 	String merge(String templateName);
 
 	/**
-	 * Mescla o arquivo de template com as variáveis do contexto gerando o arquivo correpondente.
+	 * Mescla o arquivo de template com as variáveis do contexto gerando o
+	 * arquivo correpondente.
 	 * 
 	 * @param templateName
 	 *            Nome do template.
@@ -31,5 +32,5 @@ public interface Template extends Serializable {
 	 *            Caminho do arquivo.
 	 * @throws IOException
 	 */
-	void mergeAndCreateFile(String templateName, EPath epath) throws IOException;
+	void mergeAndCreateFile(String templateName, MavenFolder mf, String path) throws IOException;
 }

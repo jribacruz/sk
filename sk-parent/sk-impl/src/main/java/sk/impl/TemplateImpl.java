@@ -2,12 +2,14 @@ package sk.impl;
 
 import java.io.IOException;
 
+import org.apache.commons.io.FilenameUtils;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
 import sk.api.Context;
 import sk.api.Template;
-import sk.api.model.EPath;
+import sk.api.enums.MavenFolder;
+import sk.api.model.EJavaProject;
 
 public class TemplateImpl implements Template {
 
@@ -18,9 +20,11 @@ public class TemplateImpl implements Template {
 
 	private Context context = Beans.getReference(Context.class);
 
+	private EJavaProject eJavaProject = Beans.getReference(EJavaProject.class);
 
 	/*
 	 * (non-Javadoc)
+	 * 
 	 * @see sk4j.template.Template#merge()
 	 */
 	@Override
@@ -30,11 +34,16 @@ public class TemplateImpl implements Template {
 
 	/*
 	 * (non-Javadoc)
-	 * @see sk4j.template.Template#mergeAndCreateFile(java.lang.String, java.lang.String)
+	 * 
+	 * @see sk4j.template.Template#mergeAndCreateFile(java.lang.String,
+	 * java.lang.String)
 	 */
 	@Override
-	public void mergeAndCreateFile(String templateName, EPath epath) throws IOException {
+	public void mergeAndCreateFile(String templateName, MavenFolder mf, String path) throws IOException {
+		String merged = this.merge(templateName);
+		String finalPath = FilenameUtils.normalize(eJavaProject.getPathName().concat(mf.getPath()).concat(context.replace(path)));
 		throw new UnsupportedOperationException();
+		
 	}
 
 	/*
