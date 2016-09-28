@@ -1,15 +1,14 @@
 package sk.impl;
 
-import java.io.IOException;
+import javax.inject.Inject;
 
-import org.apache.commons.io.FilenameUtils;
 import org.jtwig.JtwigModel;
 import org.jtwig.JtwigTemplate;
 
 import sk.api.Context;
 import sk.api.Template;
 import sk.api.enums.MavenFolder;
-import sk.api.model.EJavaProject;
+import sk.api.model.EJavaPackage;
 
 public class TemplateImpl implements Template {
 
@@ -18,9 +17,13 @@ public class TemplateImpl implements Template {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	private Context context = Beans.getReference(Context.class);
+	private Context context;
 
-	private EJavaProject eJavaProject = Beans.getReference(EJavaProject.class);
+	@Inject
+	public TemplateImpl(Context context) {
+		super();
+		this.context = context;
+	}
 
 	/*
 	 * (non-Javadoc)
@@ -35,15 +38,30 @@ public class TemplateImpl implements Template {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see sk4j.template.Template#mergeAndCreateFile(java.lang.String,
-	 * java.lang.String)
+	 * @see sk.api.Template#mergeAndCreateFile(java.lang.String, sk.api.enums.MavenFolder)
 	 */
 	@Override
-	public void mergeAndCreateFile(String templateName, MavenFolder mf, String path) throws IOException {
+	public void mergeAndCreateFile(String templateName, MavenFolder mf) {
+		// TODO Auto-generated method stub
+
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk4j.template.Template#mergeAndCreateFile(java.lang.String, java.lang.String)
+	 */
+	@Override
+	public void mergeAndCreateFile(String templateName, MavenFolder mf, String path) {
 		String merged = this.merge(templateName);
-		String finalPath = FilenameUtils.normalize(eJavaProject.getPathName().concat(mf.getPath()).concat(context.replace(path)));
+		// String finalPath = FilenameUtils.normalize(eJavaProject.getPathName().concat(mf.getPath()).concat(context.replace(path)));
 		throw new UnsupportedOperationException();
-		
+
+	}
+
+	@Override
+	public void mergeAndCreateFile(String templateName, MavenFolder mf, EJavaPackage eJavaPackage, String path) {
+
 	}
 
 	/*
