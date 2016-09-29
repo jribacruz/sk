@@ -3,9 +3,17 @@ package sk.api;
 import sk.api.annotation.TaskConf;
 import sk.api.reader.Selectable;
 
+/**
+ * 
+ * @author jcruz
+ *
+ */
 @FunctionalInterface
 public interface Task extends Selectable<Task> {
 
+	/**
+	 * 
+	 */
 	void run();
 
 	@Override
