@@ -29,14 +29,18 @@ public class XMLParser {
 
 	private Document doc;
 
-	public XMLParser(File xmlFile) throws SAXException, IOException, ParserConfigurationException {
+	private boolean namespaceAware = false;
+
+	public XMLParser(File xmlFile, boolean namespaceAware) throws SAXException, IOException, ParserConfigurationException {
 		super();
 		this.xmlFile = xmlFile;
+		this.namespaceAware = namespaceAware;
 		init();
 	}
 
 	private void init() throws SAXException, IOException, ParserConfigurationException {
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+		dbFactory.setNamespaceAware(this.namespaceAware);
 		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 		this.doc = dBuilder.parse(this.xmlFile);
 		XPathFactory xPathfactory = XPathFactory.newInstance();

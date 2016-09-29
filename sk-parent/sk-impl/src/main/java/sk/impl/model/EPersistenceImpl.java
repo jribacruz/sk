@@ -42,7 +42,7 @@ public class EPersistenceImpl implements EPersistence {
 	private void read() throws SAXException, IOException, ParserConfigurationException {
 		String persistenceXMLPath = FilenameUtils
 				.normalize(eJavaProject.getPathName().concat(mavenFolder.getPath()).concat("META-INF/persistence.xml"));
-		this.xmlParser = new XMLParser(new File(persistenceXMLPath));
+		this.xmlParser = new XMLParser(new File(persistenceXMLPath), false);
 	}
 
 	@Override

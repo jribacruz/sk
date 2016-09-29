@@ -11,7 +11,7 @@ import sk.impl.util.XMLParser;
 
 public class XMLParserTestCase {
 	public static void main(String[] args) throws SAXException, IOException, ParserConfigurationException {
-		XMLParser parser = new XMLParser(new File("src/test/java/resources/persistence.xml"));
+		XMLParser parser = new XMLParser(new File("src/test/java/resources/persistence.xml"), false);
 
 		//@formatter:off
 		parser.getNodesByXPathExpression("//property")
