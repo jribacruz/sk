@@ -43,7 +43,7 @@ public interface FS extends Serializable {
 	public void createFile(String content, MavenFolder mf, EJavaPackage eJavaPackage, String path);
 
 	/**
-	 * 
+	 * Adiciona o content a um arquivo existente.
 	 * 
 	 * @param content
 	 * @param mf
@@ -51,7 +51,7 @@ public interface FS extends Serializable {
 	public void appendFile(String content, MavenFolder mf);
 
 	/**
-	 * 
+	 * Adiciona o content a um arquivo existente.
 	 * 
 	 * @param content
 	 * @param mf
@@ -60,6 +60,7 @@ public interface FS extends Serializable {
 	public void appendFile(String content, MavenFolder mf, String path);
 
 	/**
+	 * Adiciona o content a um arquivo existente.
 	 * 
 	 * @param content
 	 * @param mf

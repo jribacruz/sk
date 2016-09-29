@@ -154,20 +154,44 @@ public class FSImpl implements FS {
 
 	@Override
 	public void appendFile(String content, MavenFolder mf) {
-		// TODO Auto-generated method stub
-
+		String finalPath = this.normalize(eJavaProject.getPathName()).concat(mf.getPath());
+		this.append(content, finalPath);
 	}
 
 	@Override
 	public void appendFile(String content, MavenFolder mf, String path) {
-		// TODO Auto-generated method stub
-
+		String finalPath = this.normalize(eJavaProject.getPathName().concat(mf.getPath()).concat(context.replace(path)));
+		this.append(content, finalPath);
 	}
 
 	@Override
 	public void appendFile(String content, MavenFolder mf, EJavaPackage eJavaPackage, String path) {
-		// TODO Auto-generated method stub
+		String finalPath = this.normalize(
+				eJavaProject.getPathName().concat(mf.getPath()).concat(eJavaPackage.getPathName()).concat(context.replace(path)));
+		this.append(content, finalPath);
+	}
 
+	private void append(String content, String finalPath) {
+		try {
+			if (Files.exists(Paths.get(finalPath))) {
+				BufferedWriter writer = Files.newBufferedWriter(Paths.get(finalPath), StandardCharsets.UTF_8, StandardOpenOption.APPEND);
+				writer.write(content);
+				writer.flush();
+				writer.close();
+				System.out.println(Colorize.blue("[APPEND]"));
+				System.out.println(Colorize.blue("\t> type: ") + "file");
+				System.out.println(Colorize.blue("\t> name: ") + FilenameUtils.getName(finalPath));
+				System.out.println(Colorize.blue("\t> path: ") + FilenameUtils.getFullPath(finalPath));
+				return;
+			}
+		} catch (IOException e) {
+			System.out.println(Colorize.yellow("[SKIP]"));
+			System.out.println(Colorize.yellow("\t> path:") + finalPath);
+			System.out.println(Colorize.yellow("\t> cause:") + e.getMessage());
+		}
+		System.out.println(Colorize.yellow("[SKIP]"));
+		System.out.println(Colorize.yellow("\t> path:") + finalPath);
+		System.out.println(Colorize.yellow("\t> cause:") + "Arquivo não existe.");
 	}
 
 }
