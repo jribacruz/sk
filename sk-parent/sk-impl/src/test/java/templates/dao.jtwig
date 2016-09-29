@@ -1,0 +1,15 @@
+package {{javaPackage}}.persistence;
+
+import br.gov.frameworkdemoiselle.stereotype.PersistenceController;
+import br.gov.frameworkdemoiselle.template.JPACrud;
+import br.jus.tre_pa.aelis.core.domain.{{javaClass}}D;
+
+@PersistenceController
+public class {{javaClass}}DAO extends JPACrud<{{javaClass}}, Long> {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+}

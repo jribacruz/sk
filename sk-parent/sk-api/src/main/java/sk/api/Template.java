@@ -24,14 +24,6 @@ public interface Template extends Serializable {
 	String merge(String templateName);
 
 	/**
-	 * 
-	 * @param templateName
-	 * @param mf
-	 * @throws IOException
-	 */
-	void mergeAndCreateFile(String templateName, MavenFolder mf);
-
-	/**
 	 * Mescla o arquivo de template com as variáveis do contexto gerando o arquivo correpondente.
 	 * 
 	 * @param templateName
@@ -52,4 +44,27 @@ public interface Template extends Serializable {
 	 * @throws IOException
 	 */
 	void mergeAndCreateFile(String templateName, MavenFolder mf, EJavaPackage eJavaPackage, String path);
+
+	/**
+	 * Mescla o arquivo de template com as variáveis do contexto gerando o arquivo correpondente.
+	 * 
+	 * @param templateName
+	 *            Nome do template.
+	 * @param path
+	 *            Caminho do arquivo.
+	 * @throws IOException
+	 */
+	void mergeAndAppendFile(String templateName, MavenFolder mf, String path);
+
+	/**
+	 * Mescla o arquivo de template com as variáveis do contexto gerando o arquivo correpondente.
+	 * 
+	 * @param templateName
+	 * @param mf
+	 * @param eJavaPackage
+	 * @param path
+	 * @throws IOException
+	 */
+	void mergeAndAppendFile(String templateName, MavenFolder mf, EJavaPackage eJavaPackage, String path);
+
 }

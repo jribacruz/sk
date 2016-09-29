@@ -9,6 +9,7 @@ import sk.api.Context;
 import sk.api.Template;
 import sk.api.enums.MavenFolder;
 import sk.api.model.EJavaPackage;
+import sk.api.util.FS;
 
 public class TemplateImpl implements Template {
 
@@ -19,10 +20,13 @@ public class TemplateImpl implements Template {
 
 	private Context context;
 
+	private FS fs;
+
 	@Inject
-	public TemplateImpl(Context context) {
+	public TemplateImpl(Context context, FS fs) {
 		super();
 		this.context = context;
+		this.fs = fs;
 	}
 
 	/*
@@ -32,18 +36,7 @@ public class TemplateImpl implements Template {
 	 */
 	@Override
 	public String merge(String templateName) {
-		return JtwigTemplate.classpathTemplate(String.format("/templates/%s.jtwig", templateName)).render(this.createJtwigModel());
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see sk.api.Template#mergeAndCreateFile(java.lang.String, sk.api.enums.MavenFolder)
-	 */
-	@Override
-	public void mergeAndCreateFile(String templateName, MavenFolder mf) {
-		// TODO Auto-generated method stub
-
+		return JtwigTemplate.classpathTemplate(String.format("/templates/%s", templateName)).render(this.createJtwigModel());
 	}
 
 	/*
@@ -53,15 +46,41 @@ public class TemplateImpl implements Template {
 	 */
 	@Override
 	public void mergeAndCreateFile(String templateName, MavenFolder mf, String path) {
-		String merged = this.merge(templateName);
-		// String finalPath = FilenameUtils.normalize(eJavaProject.getPathName().concat(mf.getPath()).concat(context.replace(path)));
-		throw new UnsupportedOperationException();
-
+		String content = this.merge(templateName);
+		this.fs.createFile(content, mf, path);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk.api.Template#mergeAndCreateFile(java.lang.String, sk.api.enums.MavenFolder, sk.api.model.EJavaPackage, java.lang.String)
+	 */
 	@Override
 	public void mergeAndCreateFile(String templateName, MavenFolder mf, EJavaPackage eJavaPackage, String path) {
+		String content = this.merge(templateName);
+		this.fs.createFile(content, mf, eJavaPackage, path);
+	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk.api.Template#mergeAndAppendFile(java.lang.String, sk.api.enums.MavenFolder, java.lang.String)
+	 */
+	@Override
+	public void mergeAndAppendFile(String templateName, MavenFolder mf, String path) {
+		String content = this.merge(templateName);
+		this.fs.appendFile(content, mf, path);
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see sk.api.Template#mergeAndAppendFile(java.lang.String, sk.api.enums.MavenFolder, sk.api.model.EJavaPackage, java.lang.String)
+	 */
+	@Override
+	public void mergeAndAppendFile(String templateName, MavenFolder mf, EJavaPackage eJavaPackage, String path) {
+		String content = this.merge(templateName);
+		this.fs.appendFile(content, mf, eJavaPackage, path);
 	}
 
 	/*
