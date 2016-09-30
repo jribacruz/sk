@@ -47,6 +47,12 @@ public class XMLParser {
 		this.xpath = xPathfactory.newXPath();
 	}
 
+	/**
+	 * Retorna uma lista de nos dada uma expressão XPATH.
+	 * 
+	 * @param expression
+	 * @return
+	 */
 	public List<Node> getNodesByXPathExpression(String expression) {
 		List<Node> nodes = new ArrayList<>();
 		try {
@@ -60,6 +66,13 @@ public class XMLParser {
 		return nodes;
 	}
 
+	/**
+	 * 
+	 * Retorna um nó dada uma expressão XPATH.
+	 * 
+	 * @param expression
+	 * @return
+	 */
 	public Optional<Node> getNodeByXPathExpression(String expression) {
 		try {
 			Node node = (Node) this.xpath.compile(expression).evaluate(doc, XPathConstants.NODE);
