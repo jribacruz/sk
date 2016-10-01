@@ -28,6 +28,11 @@
 			<artifactId>qdox</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.jboss.forge.roaster</groupId>
+			<artifactId>roaster-jdt</artifactId>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

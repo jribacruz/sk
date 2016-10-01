@@ -4,8 +4,11 @@ import java.io.Serializable;
 import java.util.Optional;
 import java.util.SortedSet;
 
+import org.jboss.forge.roaster.model.source.JavaClassSource;
+
 import com.thoughtworks.qdox.model.JavaClass;
 
+import sk.api.Updatable;
 import sk.api.reader.Selectable;
 import sk.api.util.Colorize;
 
@@ -14,7 +17,7 @@ import sk.api.util.Colorize;
  * @author jcruz
  *
  */
-public interface EJavaClass extends Selectable<EJavaClass>, Serializable {
+public interface EJavaClass extends Selectable<EJavaClass>, Updatable<JavaClassSource>, Serializable {
 
 	/**
 	 * 

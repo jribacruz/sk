@@ -1,14 +1,20 @@
 package sk.impl.model;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.SortedSet;
 import java.util.TreeSet;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.jboss.forge.roaster.Roaster;
+import org.jboss.forge.roaster.model.source.JavaClassSource;
 
 import com.thoughtworks.qdox.model.JavaClass;
 
@@ -17,6 +23,7 @@ import sk.api.model.EJavaClass;
 import sk.api.model.EJavaMethod;
 import sk.api.model.EJavaPackage;
 import sk.api.model.EJavaProject;
+import sk.api.util.Colorize;
 
 public class EJavaClassImpl implements EJavaClass {
 
@@ -254,6 +261,21 @@ public class EJavaClassImpl implements EJavaClass {
 			.stream()
 			.anyMatch(javaClass -> javaClass.getName().endsWith(name));
 		//@formatter:on
+	}
+
+	@Override
+	public void update(Consumer<JavaClassSource> e) {
+		try {
+			File javaClassFile = new File(this.getQdoxJavaClass().getSource().getURL().getFile());
+			JavaClassSource source = Roaster.parse(JavaClassSource.class, javaClassFile);
+			e.accept(source);
+			FileWriter writer = new FileWriter(javaClassFile);
+			writer.write(source.toString());
+			writer.flush();
+			writer.close();
+		} catch (IOException e1) {
+			System.out.println(Colorize.red("Erro: " + e1.getMessage()));
+		}
 	}
 
 	@Override
