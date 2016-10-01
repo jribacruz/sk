@@ -46,21 +46,21 @@ public class EPersistenceImpl implements EPersistence {
 	}
 
 	@Override
-	public String getPersistenceUnitName() {
+	public Optional<String> getPersistenceUnitName() {
 		Optional<Node> node = xmlParser.getNodeByXPathExpression("//persistence-unit");
 		if (node.isPresent()) {
-			return node.get().getAttributes().getNamedItem("name").getNodeValue();
+			return Optional.ofNullable((node.get().getAttributes().getNamedItem("name").getNodeValue()));
 		}
-		return "";
+		return Optional.empty();
 	}
 
 	@Override
-	public String getPersistenceUnitTransactionType() {
+	public Optional<String> getPersistenceUnitTransactionType() {
 		Optional<Node> node = xmlParser.getNodeByXPathExpression("//persistence-unit");
 		if (node.isPresent()) {
-			return node.get().getAttributes().getNamedItem("transaction-type").getNodeValue();
+			return Optional.ofNullable(node.get().getAttributes().getNamedItem("transaction-type").getNodeValue());
 		}
-		return "";
+		return Optional.empty();
 	}
 
 	@Override
