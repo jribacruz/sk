@@ -6,16 +6,41 @@ import com.thoughtworks.qdox.model.JavaPackage;
 
 import sk.api.reader.Selectable;
 
+/**
+ * 
+ * @author jcruz
+ *
+ */
 public interface EJavaPackage extends Selectable<EJavaPackage>, Serializable {
 
+	/**
+	 * 
+	 * @return
+	 */
 	String getPackageName();
 
+	/**
+	 * 
+	 * @return
+	 */
 	String getSourceFolderName();
 
+	/**
+	 * 
+	 * @return
+	 */
 	JavaPackage getQdoxJavaPackage();
 
+	/**
+	 * 
+	 * @return
+	 */
 	String getPathName();
 
+	/**
+	 * 
+	 * @return
+	 */
 	EJavaProject getEJavaProject();
 
 	@Override

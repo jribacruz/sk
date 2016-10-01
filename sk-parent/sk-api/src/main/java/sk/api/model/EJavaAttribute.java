@@ -29,46 +29,134 @@ public interface EJavaAttribute extends Selectable<EJavaAttribute>, Serializable
 	 */
 	JavaField getQdoxJavaField();
 
+	/**
+	 * 
+	 * @return
+	 */
 	boolean isLongPrimitive();
 
+	/**
+	 * 
+	 * @return
+	 */
 	boolean isLongWrapper();
 
+	/**
+	 * 
+	 * @return
+	 */
 	boolean isIntegerPrimitive();
 
+	/**
+	 * 
+	 * @return
+	 */
 	boolean isIntegerWrapper();
 
+	/**
+	 * 
+	 * @return
+	 */
 	boolean isBigDecimal();
 
+	/**
+	 * 
+	 * @return
+	 */
 	boolean isDate();
 
+	/**
+	 * 
+	 * @return
+	 */
 	boolean isBooleanPrimitive();
 
+	/**
+	 * 
+	 * @return
+	 */
 	boolean isBooleanWrapper();
 
+	/**
+	 * 
+	 * @return
+	 */
 	boolean isString();
 
+	/**
+	 * 
+	 * @return
+	 */
 	boolean isList();
 
+	/**
+	 * 
+	 * @return
+	 */
 	boolean isMap();
 
+	/**
+	 * 
+	 * @return
+	 */
 	boolean isSet();
 
+	/**
+	 * 
+	 * @return
+	 */
 	boolean isEnum();
 
+	/**
+	 * 
+	 * @return
+	 */
 	boolean isStatic();
 
+	/**
+	 * 
+	 * @return
+	 */
 	boolean isPrivate();
 
+	/**
+	 * 
+	 * @return
+	 */
 	boolean isPublic();
 
+	/**
+	 * 
+	 * @return
+	 */
 	boolean isProtected();
 
+	/**
+	 * 
+	 * @param annotationName
+	 * @return
+	 */
 	boolean hasAnnotationByName(String annotationName);
 
+	/**
+	 * 
+	 * @param genericTypeName
+	 * @param index
+	 * @return
+	 */
 	boolean hasGenericNameByNameAndIndex(String genericTypeName, int index);
 
+	/**
+	 * 
+	 * @param index
+	 * @return
+	 */
 	String getGenericNameByIndex(int index);
 
+	/**
+	 * 
+	 * @return
+	 */
 	EJavaProject getEJavaProject();
 
 	@Override

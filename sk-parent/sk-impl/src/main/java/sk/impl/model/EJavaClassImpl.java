@@ -2,6 +2,7 @@ package sk.impl.model;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
@@ -110,12 +111,12 @@ public class EJavaClassImpl implements EJavaClass {
 	 * @see sk4j.model.EJavaClass#getParentPackageName()
 	 */
 	@Override
-	public String getParentPackageName() {
+	public Optional<String> getParentPackageName() {
 		if (this.parentPackageName == null) {
 			List<String> packageTokens = Arrays.asList(getQdoxJavaClass().getPackageName().split("\\."));
 			this.parentPackageName = StringUtils.join(packageTokens.subList(0, packageTokens.size() - 1), ".");
 		}
-		return parentPackageName;
+		return Optional.ofNullable(parentPackageName);
 	}
 
 	/*
