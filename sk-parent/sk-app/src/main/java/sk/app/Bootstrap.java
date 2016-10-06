@@ -27,13 +27,16 @@ public class Bootstrap {
 	private Context context;
 
 	public static void main(String[] args) {
+
 		WeldContainer container = null;
 		try {
+			System.out.println(Colorize.yellow("> Init sk..."));
 			Bootstrap.validateApp(args);
 			Weld weld = new Weld();
 			container = weld.initialize();
 			Beans.setBeanManager(container.getBeanManager());
 			Bootstrap mainApp = container.instance().select(Bootstrap.class).get();
+			System.out.println(Colorize.yellow("> Bootstrap loaded."));
 			mainApp.welcomeSK();
 			mainApp.init(args);
 		} catch (ArgumentNotFoundException e) {
@@ -65,6 +68,7 @@ public class Bootstrap {
 			throw new ArgumentNotFoundException("\nÉ necessário indicar o caminho de um projeto maven como parametro.\n");
 		}
 		File projectPath = new File(args[0]);
+		System.out.println(Colorize.yellow("> Project path: " + projectPath));
 		File projectPom = new File(projectPath.getAbsolutePath().concat("/pom.xml"));
 		if (!projectPom.exists()) {
 			throw new ProjectJavaNotFoundException("\nNenhum projeto java encontrado no diretório especificado.\n");
