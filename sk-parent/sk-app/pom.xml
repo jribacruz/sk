@@ -33,11 +33,13 @@
 			<version>1.0</version>
 			<scope>compile</scope>
 		</dependency>
+		<!-- 
 		<dependency>
 			<groupId>sk.artifacts</groupId>
 			<artifactId>sk-hello</artifactId>
 			<version>1.0</version>
 		</dependency>
+		 -->
 	</dependencies>
 	<build>
 		<!-- SETA AS DEPENDÊNCIAS NO CLASSPATH DO JAR -->
@@ -48,15 +50,17 @@
 				<configuration>
 					<archive>
 						<manifest>
+							<!-- 
 							<addClasspath>true</addClasspath>
-							<classpathPrefix>dependencies</classpathPrefix>
-							<mainClass>sk.app.Bootstrap</mainClass>
 							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
 							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
+							<classpathPrefix>dependencies</classpathPrefix>
+							 -->
+							<mainClass>sk.app.Bootstrap</mainClass>
 						</manifest>
 					</archive>
 					<outputDirectory>${user.home}/sk/bin/</outputDirectory>
-					<finalName>sk-app</finalName>
+					<finalName>sk-app-${project.version}</finalName>
 				</configuration>
 			</plugin>
 			<!-- COPIA AS DEPENDÊNCIAS PARA A PASTA LIB -->

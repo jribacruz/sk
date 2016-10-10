@@ -26,8 +26,7 @@ public class Bootstrap {
 	@Inject
 	private Context context;
 
-	public static void main(String[] args) {
-
+	public static void main(String[] args) throws IOException {
 		WeldContainer container = null;
 		try {
 			System.out.println(Colorize.yellow("> Init sk..."));
@@ -62,7 +61,7 @@ public class Bootstrap {
 			private static final long serialVersionUID = 1L;
 		});
 	}
-
+	
 	private static void validateApp(String[] args) throws ArgumentNotFoundException, ProjectJavaNotFoundException {
 		if (args.length == 0) {
 			throw new ArgumentNotFoundException("\nÉ necessário indicar o caminho de um projeto maven como parametro.\n");
