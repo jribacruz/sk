@@ -33,13 +33,8 @@
 			<version>1.0</version>
 			<scope>compile</scope>
 		</dependency>
-		<!-- 
-		<dependency>
-			<groupId>sk.artifacts</groupId>
-			<artifactId>sk-hello</artifactId>
-			<version>1.0</version>
-		</dependency>
-		 -->
+		<!-- <dependency> <groupId>sk.artifacts</groupId> <artifactId>sk-hello</artifactId> 
+			<version>1.0</version> </dependency> -->
 	</dependencies>
 	<build>
 		<!-- SETA AS DEPENDÊNCIAS NO CLASSPATH DO JAR -->
@@ -50,12 +45,8 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<!-- 
-							<addClasspath>true</addClasspath>
-							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
-							<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
-							<classpathPrefix>dependencies</classpathPrefix>
-							 -->
+							<!-- <addClasspath>true</addClasspath> <addDefaultImplementationEntries>true</addDefaultImplementationEntries> 
+								<addDefaultSpecificationEntries>true</addDefaultSpecificationEntries> <classpathPrefix>dependencies</classpathPrefix> -->
 							<mainClass>sk.app.Bootstrap</mainClass>
 						</manifest>
 					</archive>
@@ -80,6 +71,29 @@
 							<overWriteReleases>false</overWriteReleases>
 							<overWriteSnapshots>false</overWriteSnapshots>
 							<overWriteIfNewer>true</overWriteIfNewer>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.0.1</version>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<!-- here the phase you need -->
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${user.home}/sk/bin</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/main/resources/bin</directory>
+									<filtering>true</filtering>
+								</resource>
+							</resources>
 						</configuration>
 					</execution>
 				</executions>
