@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>sk</groupId>
+		<artifactId>sk-parent</artifactId>
+		<version>1.0</version>
+	</parent>
+	<groupId>${groupId}</groupId>
+	<artifactId>${artifactId}</artifactId>
+	<version>${version}</version>
+	<name>${artifactId}</name>
+	<url>http://maven.apache.org</url>
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+	<dependencies>
+		<!-- https://mvnrepository.com/artifact/org.jboss.weld/weld-core -->
+		<dependency>
+			<groupId>org.jboss.weld</groupId>
+			<artifactId>weld-core</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.thoughtworks.qdox/qdox -->
+		<dependency>
+			<groupId>com.thoughtworks.qdox</groupId>
+			<artifactId>qdox</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.jboss.forge.roaster/roaster-jdt -->
+		<dependency>
+			<groupId>org.jboss.forge.roaster</groupId>
+			<artifactId>roaster-jdt</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.jboss.weld.se/weld-se -->
+		<dependency>
+			<groupId>org.jboss.weld.se</groupId>
+			<artifactId>weld-se</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.lyncode/jtwig-core -->
+		<dependency>
+			<groupId>org.jtwig</groupId>
+			<artifactId>jtwig-core</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/com.shekhargulati/strman -->
+		<dependency>
+			<groupId>com.shekhargulati</groupId>
+			<artifactId>strman</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/jline/jline -->
+		<dependency>
+			<groupId>jline</groupId>
+			<artifactId>jline</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/javax.validation/validation-api -->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-validator-annotation-processor -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator-annotation-processor</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.glassfish.web/javax.el -->
+		<dependency>
+			<groupId>org.glassfish.web</groupId>
+			<artifactId>javax.el</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-log4j12 -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>sk</groupId>
+			<artifactId>sk-api</artifactId>
+			<version>1.0</version>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<outputDirectory>${user.home}/sk/modules</outputDirectory>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
