@@ -30,7 +30,7 @@
 	<distributionManagement>
 		<repository>
 			<id>bintray-jribacruz-sk</id>
-			<name>jribacruz</name>
+			<name>jribacruz-sk</name>
 			<url>https://api.bintray.com/maven/jribacruz/sk/sk-project/;publish=1</url>
 		</repository>
 	</distributionManagement>
