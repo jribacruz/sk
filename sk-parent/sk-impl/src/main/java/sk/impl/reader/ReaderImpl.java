@@ -1,6 +1,7 @@
 package sk.impl.reader;
 
 import java.io.IOException;
+import java.util.Optional;
 import java.util.Set;
 
 import javax.inject.Inject;
@@ -49,11 +50,13 @@ public class ReaderImpl implements Reader {
 		this.message = context.replace(message);
 		this.defaultValue = context.replace(name.getDefaultValue());
 		this.contextKey = Strman.toCamelCase(name.getClass().getSimpleName());
-		String value = readConsole();
-		name.setValue(value);
-		if (validate(name)) {
-			context.put(contextKey, name);
-			return name;
+		Optional<String> value = readConsole();
+		if (value.isPresent()) {
+			name.setValue(value.get());
+			if (validate(name)) {
+				context.put(contextKey, name);
+				return name;
+			}
 		}
 		return read(message, name);
 	}
@@ -69,27 +72,33 @@ public class ReaderImpl implements Reader {
 		this.message = context.replace(message);
 		this.defaultValue = context.replace(name.getDefaultValue());
 		this.contextKey = contextKey;
-		String value = readConsole();
-		name.setValue(value);
-		if (validate(name)) {
-			context.put(contextKey, name);
-			return;
+		Optional<String> value = readConsole();
+		if (value.isPresent()) {
+			name.setValue(value.get());
+			if (validate(name)) {
+				context.put(contextKey, name);
+				return;
+			}
 		}
 		read(message, name);
 	}
 
-	private String readConsole() {
+	private Optional<String> readConsole() {
 		ConsoleReader consoleReader;
 		try {
 			consoleReader = new ConsoleReader();
 			consoleReader.setHandleUserInterrupt(true);
 			String value = consoleReader.readLine(getFormattedMessage());
 			consoleReader.close();
-			return StringUtils.isNotBlank(value) ? StringUtils.trim(value) : this.defaultValue;
+			if (StringUtils.isNotBlank(value)) {
+				return Optional.of(StringUtils.trim(value));
+			} else if (StringUtils.isNotBlank(this.defaultValue)) {
+				return Optional.of(this.defaultValue);
+			}
 		} catch (IOException e) {
 			System.out.println(Colorize.red("Erro: " + e.getMessage()));
 		}
-		return "";
+		return Optional.empty();
 	}
 
 	private <T extends Name> boolean validate(T name) {
