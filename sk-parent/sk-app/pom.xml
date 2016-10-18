@@ -43,7 +43,7 @@
 							<mainClass>sk.app.Bootstrap</mainClass>
 						</manifest>
 					</archive>
-					<outputDirectory>${user.home}/sk/</outputDirectory>
+					<outputDirectory>${user.home}/git/sk.github.io/</outputDirectory>
 					<finalName>sk-app-${project.version}</finalName>
 				</configuration>
 			</plugin>
@@ -60,7 +60,7 @@
 							<goal>copy-dependencies</goal>
 						</goals>
 						<configuration>
-							<outputDirectory>${user.home}/sk/libs/</outputDirectory>
+							<outputDirectory>${user.home}/git/sk.github.io/libs/</outputDirectory>
 							<overWriteReleases>false</overWriteReleases>
 							<overWriteSnapshots>false</overWriteSnapshots>
 							<overWriteIfNewer>true</overWriteIfNewer>
@@ -80,7 +80,7 @@
 							<goal>copy-resources</goal>
 						</goals>
 						<configuration>
-							<outputDirectory>${user.home}/sk/</outputDirectory>
+							<outputDirectory>${user.home}/git/sk.github.io/</outputDirectory>
 							<resources>
 								<resource>
 									<directory>src/main/resources/bin</directory>
