@@ -11,7 +11,7 @@ import sk.artifacts.name.UserName;
 
 /**
  * 
- * Testa a geração de arquivos via template.
+ * Testa a geração de arquivos via template lendo dados do console.
  * 
  * @author jcruz
  *
