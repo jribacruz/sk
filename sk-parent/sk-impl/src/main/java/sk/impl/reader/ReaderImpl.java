@@ -103,7 +103,8 @@ public class ReaderImpl implements Reader {
 	private <T extends Name> String getFormattedMessage() {
 		StringBuffer sb = new StringBuffer();
 		sb.append(PROMPT_ID);
-		sb.append(">");
+		sb.append("> ");
+		sb.append("\n  ");
 		sb.append(message);
 		if (StringUtils.isNotBlank(defaultValue)) {
 			sb.append(" (");
