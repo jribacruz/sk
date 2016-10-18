@@ -2,7 +2,6 @@ package sk.artifacts.task;
 
 import javax.inject.Inject;
 
-import sk.api.Context;
 import sk.api.Task;
 import sk.api.Template;
 import sk.api.annotation.TaskConf;
@@ -10,6 +9,13 @@ import sk.api.enums.MavenFolder;
 import sk.api.reader.Reader;
 import sk.artifacts.name.UserName;
 
+/**
+ * 
+ * Testa a geração de arquivos via template.
+ * 
+ * @author jcruz
+ *
+ */
 @TaskConf(label = "Gerar welcome.html no /target do projeto.", order = 1)
 public class Task1 implements Task {
 

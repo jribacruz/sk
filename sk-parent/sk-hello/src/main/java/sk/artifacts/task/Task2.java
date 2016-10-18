@@ -7,6 +7,13 @@ import sk.api.annotation.TaskConf;
 import sk.api.enums.MavenFolder;
 import sk.api.model.EJavaProject;
 
+/**
+ * 
+ * Lista todas as classes do projeto.
+ * 
+ * @author jcruz
+ *
+ */
 @TaskConf(label = "Exibir todas as classes do projeto.", order = 2)
 public class Task2 implements Task {
 
