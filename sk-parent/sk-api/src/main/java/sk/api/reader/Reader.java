@@ -18,7 +18,7 @@ public interface Reader extends Serializable {
 	 * @return
 	 * @throws IOException
 	 */
-	<T extends Name> T read(String message, T name) throws IOException;
+	<T extends Name> T read(String message, T name);
 
 	/**
 	 * 

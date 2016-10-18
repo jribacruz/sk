@@ -7,7 +7,7 @@ import sk.api.annotation.TaskConf;
 import sk.api.enums.MavenFolder;
 import sk.api.model.EJavaProject;
 
-@TaskConf(label = "Tarefa 2", order = 2)
+@TaskConf(label = "Exibir todas as classes do projeto.", order = 2)
 public class Task2 implements Task {
 
 	@Inject

@@ -1,14 +1,28 @@
 package sk.artifacts.task;
 
-import sk.api.Task;
-import sk.api.annotation.TaskConf;
+import javax.inject.Inject;
 
-@TaskConf(label = "Tarefa 1", order = 1)
+import sk.api.Context;
+import sk.api.Task;
+import sk.api.Template;
+import sk.api.annotation.TaskConf;
+import sk.api.enums.MavenFolder;
+import sk.api.reader.Reader;
+import sk.artifacts.name.UserName;
+
+@TaskConf(label = "Gerar welcome.html no /target do projeto.", order = 1)
 public class Task1 implements Task {
+
+	@Inject
+	private Template template;
+
+	@Inject
+	private Reader reader;
 
 	@Override
 	public void run() {
-		System.out.println("Tarefa 1");
+		reader.read("Digite o nome do usuário", new UserName());
+		template.mergeAndCreateFile("welcome.jtwig", MavenFolder.TARGET, "welcome.html");
 	}
 
 }

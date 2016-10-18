@@ -45,7 +45,7 @@ public class ReaderImpl implements Reader {
 	 * @see sk4j.input.Reader#read(java.lang.String, sk4j.input.Name)
 	 */
 	@Override
-	public <T extends Name> T read(String message, T name) throws IOException {
+	public <T extends Name> T read(String message, T name) {
 		this.message = context.replace(message);
 		this.defaultValue = context.replace(name.getDefaultValue());
 		this.contextKey = Strman.toCamelCase(name.getClass().getSimpleName());
@@ -61,7 +61,8 @@ public class ReaderImpl implements Reader {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see sk4j.input.Reader#read(java.lang.String, java.lang.String, sk4j.input.Name)
+	 * @see sk4j.input.Reader#read(java.lang.String, java.lang.String,
+	 * sk4j.input.Name)
 	 */
 	@Override
 	public <T extends Name> void read(String message, String contextKey, T name) throws IOException {
@@ -77,12 +78,18 @@ public class ReaderImpl implements Reader {
 		read(message, name);
 	}
 
-	private String readConsole() throws IOException {
-		ConsoleReader consoleReader = new ConsoleReader();
-		consoleReader.setHandleUserInterrupt(true);
-		String value = consoleReader.readLine(getFormattedMessage());
-		consoleReader.close();
-		return StringUtils.isNotBlank(value) ? StringUtils.trim(value) : this.defaultValue;
+	private String readConsole() {
+		ConsoleReader consoleReader;
+		try {
+			consoleReader = new ConsoleReader();
+			consoleReader.setHandleUserInterrupt(true);
+			String value = consoleReader.readLine(getFormattedMessage());
+			consoleReader.close();
+			return StringUtils.isNotBlank(value) ? StringUtils.trim(value) : this.defaultValue;
+		} catch (IOException e) {
+			System.out.println(Colorize.red("Erro: " + e.getMessage()));
+		}
+		return "";
 	}
 
 	private <T extends Name> boolean validate(T name) {
