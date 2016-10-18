@@ -2,6 +2,7 @@ package sk.api;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Optional;
 
 import sk.api.enums.MavenFolder;
 import sk.api.model.EJavaPackage;
@@ -21,10 +22,11 @@ public interface Template extends Serializable {
 	 *            Nome do template.
 	 * @return Dados mesclados.
 	 */
-	String merge(String templateName);
+	Optional<String> merge(String templateName);
 
 	/**
-	 * Mescla o arquivo de template com as variáveis do contexto gerando o arquivo correpondente.
+	 * Mescla o arquivo de template com as variáveis do contexto gerando o
+	 * arquivo correpondente.
 	 * 
 	 * @param templateName
 	 *            Nome do template.
@@ -35,7 +37,8 @@ public interface Template extends Serializable {
 	void mergeAndCreateFile(String templateName, MavenFolder mf, String path);
 
 	/**
-	 * Mescla o arquivo de template com as variáveis do contexto gerando o arquivo correpondente.
+	 * Mescla o arquivo de template com as variáveis do contexto gerando o
+	 * arquivo correpondente.
 	 * 
 	 * @param templateName
 	 * @param mf
@@ -46,7 +49,8 @@ public interface Template extends Serializable {
 	void mergeAndCreateFile(String templateName, MavenFolder mf, EJavaPackage eJavaPackage, String path);
 
 	/**
-	 * Mescla o arquivo de template com as variáveis do contexto gerando o arquivo correpondente.
+	 * Mescla o arquivo de template com as variáveis do contexto gerando o
+	 * arquivo correpondente.
 	 * 
 	 * @param templateName
 	 *            Nome do template.
@@ -57,7 +61,8 @@ public interface Template extends Serializable {
 	void mergeAndAppendFile(String templateName, MavenFolder mf, String path);
 
 	/**
-	 * Mescla o arquivo de template com as variáveis do contexto gerando o arquivo correpondente.
+	 * Mescla o arquivo de template com as variáveis do contexto gerando o
+	 * arquivo correpondente.
 	 * 
 	 * @param templateName
 	 * @param mf
