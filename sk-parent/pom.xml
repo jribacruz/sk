@@ -45,7 +45,7 @@
 			<dependency>
 				<groupId>org.jboss.weld.se</groupId>
 				<artifactId>weld-se</artifactId>
-				<version>2.3.5.Final</version>
+				<version>2.4.8.Final</version>
 			</dependency>
 			<!-- https://mvnrepository.com/artifact/com.lyncode/jtwig-core -->
 			<dependency>
